@@ -1,0 +1,129 @@
+
+<%- include ('partials/header.ejs')%>
+    <div class="stage">
+        <div class="left-stage">
+            <form action="/home" class="filters" method="POST">
+                Price Range:
+                <div>
+                    <input type="number" class="inputText" name='LowerPrice' placeholder='Lower Price' value=<%=lPrice%> >
+                    -
+                    <input type="number" class="inputText" name="HigherPrice" placeholder='Higher Price' value=<%=hPrice%> >
+                </div>
+                Type:
+                <% typesList.forEach(function(type){ %>
+                    <div class="types">
+                        <input type="checkbox" id="<%=type%>" name="<%=type%>" value="<%=type%>" 
+                        <%= keys.includes( type ) ? 'checked' : '' %> >
+                        <label for="<%=type%>">
+                            <%=type%>
+                        </label>
+                    </div>
+                <%});%>
+                <div class="filter-btns">
+                    <button class="applyFilters filter-btn">Apply Filters</button>
+                </div>
+            </form>
+            <a href="/home"><button class="filter-btn clearFilters">Clear Filters</button></a>
+        </div>
+        <div class="center-stage">
+            <div class="content-area">
+                <div class="init">init</div>
+                <div class="content-list">
+                    <%console.log(cart)%>
+                    <%productsList.slice().reverse().forEach(function(product){     %>
+                       <%if((user._id != product.authorId) && product.isAvailable){%>
+                        <div class="content">
+                            <div class="content-L">
+                                <div class="author">
+                                    <h3 class="author-info"><%= product.authorName %></h3>
+                                    <h4 class="author-phone"><%= product.authorPhone %>  </h4>
+                                    <h4 class="author-email"><%= product.authorEmail %>  </h4>
+                                    <div class="product-price">Price:<%= product.price %></div>
+                                <div class="product-name">Product Name:<%= product.productName %></div>
+                                <div class="product-description">Description:<%= product.productDescription %></div>
+                                
+                                </div>
+                                <a class="others-links interested others" id="interested"><button>Interested</button></a>
+                                <%console.log(product._id in cart,product._id)%>
+                                <%if( !(cart.includes(product._id))){%>
+                                <a href="/addToCart/<%=product._id%>" class="others-links btn"
+                                    id="addToCart"><button>Add to cart</button></a>
+                                <%} else {%>
+                                    <a href="/removeCart/<%=product._id%>" class="others-links btn"
+                                        id="addToCart"><button>Remove From Cart</button></a>
+                                <%}%>
+                            </div>
+
+                            <div class="product ">
+                                <h3><%= product.productType%></h3>
+
+                                <img src="./product_images/<%= product._id %>/<%= product.image[0] %>" alt="img"
+                                class="product-pic-img">
+                                
+                            </div>
+                            
+
+                        </div>
+                        <%}%>
+                    <% });%>
+                </div>
+            </div>
+            middle
+        </div>
+        <div class="right-stage">right</div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="/js/home.js"></script>
+        
+        
+        
+        
+<!-- <script>
+    console.log('heii');
+    var socket = io();
+    console.log(socket);
+    console.log(socket);
+    $('.interested').click((event) => {
+            event.preventDefault();
+            console.log('button');
+
+            var iid = $(event.target.closest('.others'));
+    
+    // var elu=$(iid);
+    
+    // console.log('target',event.target.closest('.others'));
+            console.log('target',iid);
+            console.log('target',iid.siblings());
+            console.log('target',iid.siblings().children('.author').children('.author-info').children('.author-contact').text());
+            var author_contact=iid.siblings().children('.author').children('.author-info').children('.author-contact').text().trim().split(',');
+            var receiverEmail = author_contact[0].trim();
+            console.log(receiverEmail); 
+    
+            var flag = confirm('send message to product owner that u r interested in the product ? ');
+            if (flag) {
+
+                console.log('send');
+                var userId = $('#user-id').html();
+                var userEmail = $('#user-email').html();
+        
+        // var receiverEmail = elu.children('.content').children('author').children('author-name').text();
+        
+                socket.emit('connectUser', { userEmail, userId });
+                var time = Date.now();
+                console.log(userId, userEmail, receiverEmail);
+                socket.emit('send', { to: receiverEmail, from: userEmail, msg: `hello friend, I am ${userEmail} intersted in your product with name ${'.productName'} , price ${'.productPrice'}`, info: 'fromProduct' , time : time});
+            }
+        });
+
+        socket.on('sent', () => {
+            // $('.msg-input').text()='heloo from server';
+            console.log('msg sent');
+            alert('msg sent');
+});
+
+
+</script> -->
+</body>
+</html>

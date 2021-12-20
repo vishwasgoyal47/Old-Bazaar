@@ -1,0 +1,142 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+.navbar{
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    background-color: teal;
+    height: 10vh;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    font-size: 20px;
+    z-index: 2;
+}
+.icon{
+    position: absolute;
+    left: 10px;
+    border: 1px solid black;
+    margin: auto 15px;
+}
+.navlist{
+    position: absolute;
+    right: 10px;
+    margin: auto;
+}
+.navlist ul{
+    list-style: none;
+    display: flex;
+}
+
+.navlist ul li{
+    /* padding: 5px; */
+    margin: 5px 10px;
+}
+
+.navlist ul li a{
+    
+    margin: 5px 10px;
+    cursor: pointer;
+    text-decoration: none;
+}
+.navlist ul li a:hover{
+    text-decoration: underline;
+}
+.stage{
+    
+    display: flex;
+    justify-content: space-evenly;
+    height: 190vh;
+    overflow: hidden;
+    border: 1px solid black;
+    background: lightgray;
+}
+.left-stage{
+    
+    height: 100%;
+    width: 26%;
+    border: 1px solid blue;
+    background: white;
+    margin-top: 5px;
+}
+.filters{
+    border: 1px solid purple;
+    padding: 5px;
+    width: 90%;
+    margin: auto;
+}
+.filters div{
+    padding: 5px 5px;
+}
+.inputText{
+    width: 40%;
+}
+
+.filter-btn{
+    margin: 2px;
+    padding: 2px;
+}
+.clearFilters{
+    position: relative;
+    left: 10px;
+}
+.center-stage{
+    width:40%;
+    height: 100%;
+    border: 1px solid bred;
+    flex-grow: 2.5;
+}
+.content-area{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: auto;
+    border: 1px solid purple;
+}
+.init{
+    border: 1px solid blue;
+}
+.content{
+    display: flex;
+    
+    width:100%;
+}
+.content .content-L{
+    display:inline-block;
+    width: 40%;
+    height:200px;
+
+}
+.content-L .author{
+    display: block;
+    position:relative;
+    width: 100%;
+    height:90%;
+}
+
+.btn{
+
+    position:relative;
+    width: 100%;
+    height: 10%;
+}
+.content .product{
+    position:relative;
+    width: 60%;
+    height: 100%;
+}
+.product img{
+    position: relative;
+    width:100%;
+    height:800%;
+}
+.right-stage{
+    left: 80%;
+    height: 100%;
+    width: 26%;
+    border: 1px solid blue;
+    background: white;
+    margin-top: 5px;
+}

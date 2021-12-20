@@ -1,0 +1,54 @@
+<!Doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css">
+        <link rel="stylesheet" href="./css/style.css">
+    </head>
+
+    <body>
+        <div class="fullBody">
+            <div class="main ">
+                <h5 class="heading">
+                    <span><b>Login</b></span>
+                    <span><b>Sign Up</b></span>
+                </h5>
+                <input class="checkbox" type="checkbox" id="trans" name="trans">
+                <label for="trans"></label>
+                <div class="sign">
+                <div class="login ">
+                    <h4 class="center">Login</h4>
+                    <div class = "form">
+                        
+                        <form action = "/login" class="form_group"method="GET">
+                            <input type = "text" name="logemail" id="logemail" placeholder = "Email Address">
+                            <input type = "password" name="logpassword" id="logpassword" placeholder = "Password">
+                            <a href="#">Forgot Password</a>
+                            <button class = "form_button"> Submit </button>
+                        </form>
+                    </div>
+                </div>
+                
+                    <div class="signUp ">
+                        <h4 class="center">Sign up</h4>
+                        <div class = "form">
+                            <form action = "/signUp" class="signUpForm form_group" method="POST">
+                                <input type = "text" name="name" id="name" placeholder = "Name">
+                                <input type = "text" name="sigemail" id="sigemail" placeholder = "Email Address">
+                                <input type = "password" name="sigpassword" id="sigpassword" placeholder = "Password">
+                                <input type = "password" name="cpassword" id="cpassword" placeholder = "Confirm Password">
+                                <input type = "text" name="phoneNo" id="phoneNo" placeholder = "Phone-Number">
+                                <button class = "form_button"> Submit </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </body>
+
+</html>

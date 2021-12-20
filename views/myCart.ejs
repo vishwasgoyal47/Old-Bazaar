@@ -1,0 +1,68 @@
+
+<%- include ('partials/header.ejs')%>
+    <div class="stage">
+        <div class="left-stage">
+            <form action="/myCart" class="filters" method="POST">
+                Price Range:
+                <div>
+                    <input type="number" class="inputText" name='LowerPrice' placeholder='Lower Price' value=<%=lPrice%> >
+                    -
+                    <input type="number" class="inputText" name="HigherPrice" placeholder='Higher Price' value=<%=hPrice%> >
+                </div>
+                Type:
+                <% typesList.forEach(function(type){ %>
+                    <div class="types">
+                        <input type="checkbox" id="<%=type%>" name="<%=type%>" value="<%=type%>" 
+                        <%= keys.includes( type ) ? 'checked' : '' %> >
+                        <label for="<%=type%>">
+                            <%=type%>
+                        </label>
+                    </div>
+                <%});%>
+                <div class="filter-btns">
+                    <button class="applyFilters filter-btn">Apply Filters</button>
+                </div>
+            </form>
+            <a href="/myCart"><button class="filter-btn clearFilters">Clear Filters</button></a>
+        </div>
+        <div class="center-stage">
+            <div class="content-area">
+                <div class="init">init</div>
+                <div class="content-list">
+                    <%productsList.forEach(function(product){     %>
+                        <!-- <%console.log(user._id,product.authorId,user._id != product.authorId)%> -->
+                       <%if(product.isAvailable){%>
+                        <div class="content">
+                            <div class="content-L">
+                                <div class="author">
+                                    <h3><a href="/id/<%=product.authorId%>">By:<%= product.authorName %></a></h3>
+                                    <!-- <h4>Phone Number :<%= product.authorPhone %>  </h4>
+                                    <h4>Email :<%= product.authorEmail %>  </h4> -->
+                                    <div class="product-price">Price:<%= product.price %></div>
+                                <div class="product-name">Product Name:<%= product.productName %></div>
+                                <div class="product-description">Description:<%= product.productDescription %></div>
+                                </div>
+                                <a href="/myCart/removeCart/<%=product._id%>" class="others-links btn"
+                                    id="addToCart"><button>Remove From Cart</button></a>
+                            </div>
+
+                            <div class="product ">
+                                <h3><%= product.productType%></h3>
+
+                                <img src="./product_images/<%= product._id %>/<%= product.image[0] %>" alt="img"
+                                class="product-pic-img">
+                                
+                            </div>
+                            
+
+                        </div>
+                        <%}%>
+                    <% });%>
+                </div>
+            </div>
+            middle
+        </div>
+        <div class="right-stage">right</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,168 @@
+
+<%- include ('partials/header.ejs')%>
+    <div class="stage">
+        <div class="left-stage">left</div>
+        <div class="center-stage">
+            <div class="content-area">
+                <div class="init">init</div>
+                <h2>Product Details</h2>
+                <form action="/posting" enctype="multipart/form-data" class="product-form" id="product-form-id" method="POST">
+                    <div class="form-group">
+                        <div class="imageArea">
+                            <button class="img-left" >left</button>
+                            <img src="/images/nightsky.jpg" alt="img" class="productImg">
+                            <button class="del-img">delete</button>
+                            <button class="img-right">right</button>
+                            <span class="img-nums"><span class="img-index">0</span> of <span class="img-tot">0</span></span>
+                        </div>
+                        <br>
+                        <label for="img" class="label-group add-img">Image</label>
+                        <input type="file" class="image" name="productImage" multiple id="img" required>
+
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="" class="label-group">Price :</label>
+                        <input type="number" class="inputText" name="productPrice" placeholder="price" required>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="label-group">Product Name :</label>
+                        <input type="text" class="inputText" name="productName" placeholder="Product Name" required>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="types" class="label-group">Product Type :</label>
+                        <select name="typeList" id="types" form="product-form-id" class="typeList">
+                            <%typesList.forEach(function(type){%>
+                                <option value="<%=type%>"><%=type%></option>
+                            <%});%>
+                        </select>
+
+                    </div>
+                    <div class="form-group">
+                        <div><label for="" class="label-group">Product Description :</label></div>
+                        <textarea name="productDescription" id="" cols="30" rows="10" class="inputText textArea"
+                            placeholder="Description" form="product-form-id"></textarea>
+                    </div>
+                    <button class="submit-btn">Post</button>
+                </form>
+            </div>
+        </div>
+        <div class="right-stage">right</div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <!-- <script src="/public/js/sellItem.js"></script> -->
+        
+        <script>
+            filesList = [];
+filesListURL = [];
+var tot = 0;
+var index = 0;
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        input_filesList = [];
+        for (const element in input.files) {
+            input_filesList[element] = input.files[element];
+        }
+        console.log(input_filesList);
+        console.log(input.files);
+        index = parseInt($('.img-index').text());
+        tot = parseInt($('.img-tot').text());
+        filesList.splice.apply(filesList, [index, 0].concat(input_filesList));
+        tot = filesList.length;
+        $('.img-index').text(index + 1);
+        $('.img-tot').text(tot);
+        j = 0;
+        for (i = 0; i < input_filesList.length; i++) {
+            var fileReader = new FileReader();
+            fileReader.onload = async function (e) {
+
+                filesListURL.splice(index, 0, e.target.result);
+                // index=index+1;
+                console.log(`j= ${j}`);
+                if (j == input_filesList.length - 1) {
+                    index = parseInt($('.img-index').text());
+                    console.log(index-1,filesListURL[index-1]);
+                    $('.productImg').attr('src', filesListURL[index - 1]).width('100%').height('100%');
+                }
+                j++;
+                index++;
+            };
+
+            fileReader.readAsDataURL(input.files[i]);
+        }
+    }
+}
+$('#img').change(function () {
+
+    readURL(this);
+    console.log("after fun call");
+})
+
+$(".img-left").click(
+    function (event) {
+        event.preventDefault();
+    }
+);
+$(".img-right").click(
+    function (event) {
+        event.preventDefault();
+    }
+);
+
+$(".img-right").click(function () {
+    index = parseInt($('.img-index').text());
+    if (index < tot) {
+        index = index + 1;
+        $('.productImg').attr('src', filesListURL[index - 1]).width('100%').height('100%');
+    }
+    $('.img-index').text(index);
+});
+$(".img-left").click(function () {
+    index = parseInt($('.img-index').text());
+    if (index > 1) {
+        index = index - 1;
+        $('.productImg').attr('src', filesListURL[index - 1]).width('100%').height('100%');
+    }
+    $('.img-index').text(index);
+});
+
+$('.del-img').click(
+    function (event) {
+        event.preventDefault();
+        index = parseInt($('.img-index').text());
+        tot = parseInt($('.img-tot').text());
+        if (tot > 0) {
+            filesList.splice(index - 1, 1);
+            filesListURL.splice(index - 1, 1);
+            tot = tot - 1;
+            $('.img-tot').text(tot);
+            if (tot == 0) {
+                index = 0;
+                $('.productImg').attr('src', '');
+                $('.img-index').text(index);
+            }
+            else {
+                if (index == tot + 1) {
+                    index = index - 1;
+                }
+                $('.productImg').attr('src', filesListURL[index - 1]).width('100%').height('100%');
+                $('.img-index').text(index);
+
+            }
+        }
+    });
+
+
+
+
+
+
+
+
+        </script>
+</body>
+
+</html>
