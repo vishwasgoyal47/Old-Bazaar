@@ -21,7 +21,7 @@ const chats = require('./models/chats');
 var activeUsers = {};
 
 
-const url = 'mongodb+srv://vishwasgoyal47:vishwas_0502@cluster0.2hggo.mongodb.net/database1?retryWrites=true&w=majority';
+const url = '';
 
 // Setting PAths
 app.set('view engine', 'ejs');
